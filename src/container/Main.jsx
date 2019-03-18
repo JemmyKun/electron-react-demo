@@ -1,38 +1,45 @@
 import React from 'react';
-import './app.scss';
-import { Switch, Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 
-import Head from './head/Head';
-import Aside from './aside/Aside';
-import Todo from './todo/Todo';
-import Page1 from './page1/Page1';
-import Page2 from './page2/Page2';
-import Page3 from './page3/Page3';
-import Page4 from './page4/Page4';
-import Hooks from './hooks/Hooks';
+import Page from './Page';
+import Page2 from './Page2';
+import Chart from './Chart';
+import Hooks from './Hooks';
+import Head from './Head';
+import Aside from './Aside';
 
-const App = (props) => {
-    return (
-        <div className="app-container">
-            <Head />
-            <div className="main-container">
-                <div className="app-aside">
-                    <Aside history={props.history} />
-                </div>
-                <div className="app-content">
-                    <Switch>
-                        <Route path="/todo" component={Todo} />
-                        <Route path="/page1" component={Page1} />
-                        <Route path="/page2" component={Page2} />
-                        <Route path="/page3" component={Page3} />
-                        <Route path="/page4" component={Page4} />
-                        <Route path='/hooks' component={Hooks} />
-                        <Route path="/" component={Todo} />
-                    </Switch>
-                </div>
-            </div>
-        </div>
-    )
-}
+const Main = (props) => {
+	return (
+		<div className="app-container">
+			<div className="app-head">
+				<Head
+					history={props.history}
+					goPage={(e, path) => {
+						props.history.push(path);
+					}}
+				/>
+			</div>
+			<div className="main-container">
+				<div className="app-aside">
+					<Aside
+						goPage={(e, path) => {
+							props.history.push(path);
+						}}
+						history={props.history}
+					/>
+				</div>
+				<div className="app-content">
+					<Switch>
+						<Route path="/" exact component={Page} />
+						<Route path="/main/page" component={Page} />
+						<Route path="/main/page2" component={Page2} />
+						<Route path="/main/chart" component={Chart} />
+						<Route path="/main/hooks" component={Hooks} />
+					</Switch>
+				</div>
+			</div>
+		</div>
+	);
+};
 
-export default App;
+export default Main;

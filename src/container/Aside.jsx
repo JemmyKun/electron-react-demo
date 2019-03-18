@@ -1,53 +1,84 @@
 import React, { useState, useEffect } from 'react';
+import { Menu, Icon } from 'antd';
+const SubMenu = Menu.SubMenu;
 
-const pathData = [
+const menuList = [
 	{
 		path: '/',
-		name: 'page'
+		name: 'page1',
+		icon: 'calendar'
 	},
 	{
-		path: 'page',
-		name: 'page'
+		path: '/main/page2',
+		name: 'page2',
+		icon: 'mail'
 	},
 	{
-		path: 'page2',
-		name: 'page2'
+		path: '/main/chart',
+		name: 'chart',
+		icon: 'bar-chart'
 	},
 	{
-		path: 'chart',
-		name: 'chart'
+		path: '/main/hooks',
+		name: 'hooks',
+		icon: 'appstore',
 	}
 ];
 
 const Aside = (props) => {
-	const [ curPath, setCurPath ] = useState('');
+	const [curPath, setCurPath] = useState('/');
 
 	useEffect(
 		() => {
-			console.log('curPath:', curPath);
+			// console.log('curPath:', curPath);
 		},
-		[ curPath ]
+		[curPath]
 	);
 
 	return (
-		<ul className="aside-container">
-			{pathData.map((item, index) => {
-				let clName = curPath === item.path ? 'active link-item' : 'link-item';
-
-				return (
-					<li
-						className={clName}
-						key={index}
-						onClick={(e) => {
-							props.goPage(e, item.path);
-							setCurPath(item.path);
-						}}
-					>
-						<span>{item.name}</span>
-					</li>
-				);
-			})}
-		</ul>
+		<div className="aside-container">
+			<Menu
+				style={{ width: '100%', height: '100%' }}
+				defaultSelectedKeys={['/']}
+				defaultOpenKeys={['/page']}
+				mode={'inline'}
+			>
+				{
+					menuList.map((item) => {
+						let clName = curPath === item.path ? 'active' : '';
+						let children = item.children || [];
+						let { name, icon, path } = item;
+						if (children.length === 0) {
+							return (
+								<Menu.Item key={path} className={clName} onClick={(e) => {
+									props.goPage(e, item.path);
+									setCurPath(item.path);
+								}}>
+									<Icon type={icon} />
+									{name}
+								</Menu.Item>
+							)
+						} else {
+							return (
+								<SubMenu key={path} title={<span><Icon type={icon} /><span>{name}</span></span>} onClick={(e) => {
+									props.goPage(e, item.path);
+									setCurPath(item.path);
+								}}>
+									{
+										children.map(val => {
+											let { name, path } = val;
+											return (
+												<Menu.Item key={path}>{name}</Menu.Item>
+											)
+										})
+									}
+								</SubMenu>
+							)
+						}
+					})
+				}
+			</Menu>
+		</div>
 	);
 };
 

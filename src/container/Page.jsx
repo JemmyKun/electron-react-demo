@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Page = ()=>{
+const Page = () => {
     return (
         <div className="app-main">
-            Page-main
+            Page1-main
         </div>
     )
 }
