@@ -1,0 +1,55 @@
+.todo-container {
+    .todo-list-box {
+        &>li {
+            height: 30px;
+            line-height: 30px;
+            margin-top: 5px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .item-dot,
+            .item-index {
+                display: inline-block;
+                height: 100%;
+            }
+
+            .item-index {
+                margin: 0 3px;
+            }
+
+            .anticon {
+                margin: 0 10px;
+                font-size: 18px;
+                color: red;
+            }
+
+            .ant-input {
+                display: inline-block;
+                margin-right: 20px;
+                width: 300px;
+                height: 100%;
+            }
+        }
+    }
+
+    .add-box {
+        display: flex;
+        height: 40px;
+        justify-content: flex-start;
+        align-items: center;
+
+        .add-input {
+            display: inline-block;
+            width: 300px;
+        }
+    }
+
+    .todo-name {
+        display: inline-block;
+        margin-right: 20px;
+        width: 300px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,35 @@
+@import '~antd/dist/antd.css';
+
+#root {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.app-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    .main-container {
+        height: calc(100% - 60px);
+        display: flex;
+        justify-content: flex-start;
+
+        .app-aside {
+            width: 180px;
+            height: 100%;
+
+            .aside-container {
+                width: 180px;
+                height: 100%;
+            }
+        }
+
+        .app-content {
+            width: calc(100% - 180px);
+            height: 100%;
+            padding: 20px;
+        }
+    }
+}
